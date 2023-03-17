@@ -1,0 +1,12 @@
+<button class="w-full flex flex-col h-full" (click)="startTimer()">
+  <h1 class="font-bold title-case text-xl text-center">
+    {{ title }}
+  </h1>
+  <div class="text-center">
+    {{ timeHumanReadable$ | async }}
+  </div>
+  <app-redezeiten-entry
+    *ngFor="let entry of redezeitenForType$ | async; index as i"
+    [redezeit]="entry"
+  ></app-redezeiten-entry>
+</button>
