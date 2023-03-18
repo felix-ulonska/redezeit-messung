@@ -89,8 +89,9 @@ export class RedezeitSideComponent {
         this.globaleState.redezeiten.next([
           ...this.globaleState.redezeiten.value,
           {
-            time: seconds,
+            duration: seconds,
             type: this.type,
+            date: new Date(),
           },
         ]);
       });

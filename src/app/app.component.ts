@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RedezeitType } from './models/redezeit-type';
+import { GlobalStateService } from './_services/global-state.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,6 @@ import { RedezeitType } from './models/redezeit-type';
 })
 export class AppComponent {
   STATE_ENUM = RedezeitType;
+
+  constructor(public redezeitState: GlobalStateService) {}
 }

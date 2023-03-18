@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { RedezeitTableComponent } from './redezeit-table/redezeit-table.component';
 import { RedezeitSideComponent } from './redezeit-side/redezeit-side.component';
 import { PauseComponent } from './pause/pause.component';
-import { RedezeitenEntryComponent } from './redezeiten-entry/redezeiten-entry.component';
+import { DurationPipe } from './_pipes/duration.pipe';
+import { StartDatePipe } from './_pipes/start-date.pipe';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +16,12 @@ import { RedezeitenEntryComponent } from './redezeiten-entry/redezeiten-entry.co
     RedezeitTableComponent,
     RedezeitSideComponent,
     PauseComponent,
-    RedezeitenEntryComponent
+    DurationPipe,
+    StartDatePipe,
+    HistoryComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

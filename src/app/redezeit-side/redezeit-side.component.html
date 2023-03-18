@@ -5,8 +5,4 @@
   <div class="text-center">
     {{ timeHumanReadable$ | async }}
   </div>
-  <app-redezeiten-entry
-    *ngFor="let entry of redezeitenForType$ | async; index as i"
-    [redezeit]="entry"
-  ></app-redezeiten-entry>
 </button>

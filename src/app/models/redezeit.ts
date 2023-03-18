@@ -1,6 +1,7 @@
 import { RedezeitType } from './redezeit-type';
 
 export interface Redezeit {
-  time: number;
+  duration: number;
   type: RedezeitType;
+  date: Date;
 }

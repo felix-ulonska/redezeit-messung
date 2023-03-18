@@ -1,4 +1,4 @@
-<div class="h-full">
+<div class="h-screen">
   <div class="flex flex-col h-1/2">
     <app-redezeit-side
       [type]="STATE_ENUM.CISM"
@@ -10,5 +10,8 @@
       class="flex-grow bg-emerald-300"
     ></app-redezeit-side>
   </div>
-  <div class="h-1/2 bg-slate-400"></div>
+  <div class="h-1/2 bg-slate-400">
+    <h1 class="text-center text-2xl">Historie</h1>
+    <app-history></app-history>
+  </div>
 </div>
