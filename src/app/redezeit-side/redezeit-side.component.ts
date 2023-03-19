@@ -34,7 +34,6 @@ const removeRunning = map<[number, number, any], [number, number]>(
 export class RedezeitSideComponent {
   @Input() type: RedezeitType = RedezeitType.CISM;
 
-  running$ = new BehaviorSubject(false);
   startTime$ = new BehaviorSubject<number>(0);
   everySecond$ = new Subject<number>();
 
@@ -56,6 +55,10 @@ export class RedezeitSideComponent {
       redezeiten.filter((redezeit) => redezeit.type == this.type)
     )
   );
+
+  get running$() {
+    return this.globaleState.state$.pipe(map((state) => this.type === state));
+  }
 
   get title() {
     switch (this.type) {

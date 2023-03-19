@@ -1,7 +1,17 @@
-<div class="grid grid-cols-2">
-  <div *ngFor="let redezeit of redezeitState.redezeiten | async">
-    <div class="text-center">
-      {{ redezeit.date | startDate }} {{ redezeit.duration | duration }}
+<div
+  *ngFor="let redezeit of redezeitState.redezeiten | async"
+  class="flex justify-center"
+>
+  <div class="flex justify-between w-60">
+    <div class="font-light">
+      {{ redezeit.date | startDate }}
+    </div>
+    -
+    <div>
+      {{ redezeit.duration | duration }}
+    </div>
+    <div>
+      {{ redezeit.type | typeRedezeit }}
     </div>
   </div>
 </div>

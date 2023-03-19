@@ -1,8 +1,20 @@
-<button class="w-full flex flex-col h-full" (click)="startTimer()">
+<button
+  class="w-full flex flex-col h-full hover:bg-slate-200"
+  (click)="startTimer()"
+  [class.bg-green-200]="running$ | async"
+>
   <h1 class="font-bold title-case text-xl text-center">
     {{ title }}
   </h1>
-  <div class="text-center">
-    {{ timeHumanReadable$ | async }}
+  <div class="flex flex-col h-full justify-around">
+    <div>
+      <span class="font-bold text-xl">
+        <div *ngIf="running$ | async; else notRunning">Messung stoppen</div>
+        <ng-template #notRunning>Messung starten</ng-template>
+      </span>
+      <div class="text-center">
+        {{ timeHumanReadable$ | async }}
+      </div>
+    </div>
   </div>
 </button>
