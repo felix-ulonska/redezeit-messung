@@ -34,3 +34,5 @@ jobs:
       if: success()
       id: deployment
       uses: actions/deploy-pages@v1
+      artifact_name:
+        dist/
