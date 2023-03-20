@@ -1,4 +1,4 @@
-<app-modal titleText="Edit Entry">
+<app-modal (saved)="save()" titleText="Edit Entry">
   <form [formGroup]="form">
     <label>Zeit in Sekunden</label>
     <input
@@ -9,25 +9,25 @@
     <div class="flex gap-3 mx-5 my-5">
       <app-toggle-button
         (click)="changeSpeaker(Speaker.CISM)"
-        [toggled]="Speaker.CISM === currentSelectedRedezeitType"
+        [toggled]="Speaker.CISM === currentSpeaker"
         >CIS-M</app-toggle-button
       >
       <app-toggle-button
-        [toggled]="Speaker.FLINTA === currentSelectedRedezeitType"
+        [toggled]="Speaker.FLINTA === currentSpeaker"
         (click)="changeSpeaker(Speaker.FLINTA)"
         >FLINTA*</app-toggle-button
       >
     </div>
     <div class="flex gap-3 mx-5 my-5">
       <app-toggle-button
-        (click)="changeSpeaker(Speaker.CISM)"
-        [toggled]="Speaker.CISM === currentSelectedRedezeitType"
-        >Beitrag</app-toggle-button
+        (click)="changeType(Type.Bericht)"
+        [toggled]="Type.Bericht === currentType"
+        >Bericht</app-toggle-button
       >
       <app-toggle-button
-        [toggled]="Speaker.FLINTA === currentSelectedRedezeitType"
-        (click)="changeSpeaker(Speaker.FLINTA)"
-        >Bericht</app-toggle-button
+        [toggled]="Type.Beitrag === currentType"
+        (click)="changeType(Type.Beitrag)"
+        >Beitrag</app-toggle-button
       >
     </div>
   </form>

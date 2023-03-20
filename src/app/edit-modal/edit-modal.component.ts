@@ -1,6 +1,6 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { combineLatest, firstValueFrom, map } from 'rxjs';
+import { combineLatest, firstValueFrom, map, Subject } from 'rxjs';
 import { RedezeitSpeaker } from '../models/redezeit-type';
 import { RedezeitType } from '../_enums/redezeit-type.enum';
 import { GlobalStateService } from '../_services/global-state.service';
@@ -11,15 +11,21 @@ import { ModalService } from '../_services/modal.service';
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.scss'],
 })
-export class EditModalComponent implements OnInit {
+export class EditModalComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: ModalService,
     private globalStateService: GlobalStateService
   ) {}
 
+  onDestroy$ = new Subject<void>();
   Speaker = RedezeitSpeaker;
+  Type = RedezeitType;
 
-  get currentSelectedRedezeitType() {
+  get currentType() {
+    return this.form.controls['type'].value;
+  }
+
+  get currentSpeaker() {
     return this.form.controls['speaker'].value;
   }
 
@@ -41,7 +47,7 @@ export class EditModalComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    firstValueFrom(this.entry$).then((entry) =>
+    this.entry$.subscribe((entry) =>
       this.form.setValue({
         duration: entry?.duration ?? 0,
         speaker: entry?.speaker ?? RedezeitSpeaker.CISM,
@@ -50,7 +56,40 @@ export class EditModalComponent implements OnInit {
     );
   }
 
+  public ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
   public changeSpeaker(speaker: RedezeitSpeaker) {
     this.form.patchValue({ speaker });
+  }
+
+  public changeType(type: RedezeitType) {
+    this.form.patchValue({ type });
+  }
+
+  public save() {
+    firstValueFrom(
+      combineLatest([this.globalStateService.redezeiten, this.entry$])
+    )
+      .then(([redezeiten, entryID]) => {
+        this.globalStateService.redezeiten.next(
+          redezeiten.map((redezeit) => {
+            if (redezeit.id === entryID?.id) {
+              return {
+                ...redezeit,
+                duration: this.form.value.duration ?? 0,
+                speaker: this.form.value.speaker ?? 0,
+                type: this.form.value.type ?? 0,
+              };
+            }
+            return redezeit;
+          })
+        );
+      })
+      .then(() => {
+        this.modalService.closeModal();
+      });
   }
 }
