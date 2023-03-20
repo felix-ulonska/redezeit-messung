@@ -30,9 +30,14 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Deploy
-      if: success()
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        # Upload entire repository
+        path: 'dist'
+    - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
-      inputs:
-        artifact_name: dist/
+
