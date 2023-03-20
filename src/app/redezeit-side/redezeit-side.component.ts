@@ -58,7 +58,9 @@ export class RedezeitSideComponent {
   );
 
   get running$() {
-    return this.globaleState.state$.pipe(map((state) => this.type === state));
+    return this.globaleState.state$.pipe(
+      map((state) => this.type === state && state !== RedezeitSpeaker.PAUSE)
+    );
   }
 
   get title() {
@@ -85,8 +87,11 @@ export class RedezeitSideComponent {
     ])
       .pipe(
         filter(
+          ([[speakerType, _], _a]) => speakerType !== RedezeitSpeaker.PAUSE
+        ),
+        filter(
           ([[old_state, new_state], _]) =>
-            old_state == this.type && new_state !== this.type
+            old_state === this.type && new_state !== this.type
         )
       )
       .subscribe(([_, seconds]) => {

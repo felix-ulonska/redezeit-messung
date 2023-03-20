@@ -4,7 +4,12 @@
       [type]="STATE_ENUM.CISM"
       class="flex-grow bg-violet-300"
     ></app-redezeit-side>
-    <app-redezeit-side [type]="STATE_ENUM.PAUSE"></app-redezeit-side>
+    <button
+      class="w-full flex flex-col h-full justify-center items-center hover:bg-slate-200"
+      (click)="stop()"
+    >
+      <h1 class="text-2xl">Redezeit beenden</h1>
+    </button>
     <app-redezeit-side
       [type]="STATE_ENUM.FLINTA"
       class="flex-grow bg-emerald-300"

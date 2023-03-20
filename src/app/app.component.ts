@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RedezeitSpeaker } from './models/redezeit-type';
+import { RedezeitType } from './_enums/redezeit-type.enum';
 import { GlobalStateService } from './_services/global-state.service';
 import { ModalService } from './_services/modal.service';
 
@@ -15,4 +16,8 @@ export class AppComponent {
     public redezeitState: GlobalStateService,
     private modalService: ModalService
   ) {}
+
+  stop() {
+    this.redezeitState.state$.next(RedezeitSpeaker.PAUSE);
+  }
 }
