@@ -8,25 +8,25 @@
     <div>Art</div>
     <div class="flex gap-3 mx-5 my-5">
       <app-toggle-button
-        (click)="changeRedezeittype(RedezeitType.CISM)"
-        [toggled]="RedezeitType.CISM === currentSelectedRedezeitType"
+        (click)="changeSpeaker(Speaker.CISM)"
+        [toggled]="Speaker.CISM === currentSelectedRedezeitType"
         >CIS-M</app-toggle-button
       >
       <app-toggle-button
-        [toggled]="RedezeitType.FLINTA === currentSelectedRedezeitType"
-        (click)="changeRedezeittype(RedezeitType.FLINTA)"
+        [toggled]="Speaker.FLINTA === currentSelectedRedezeitType"
+        (click)="changeSpeaker(Speaker.FLINTA)"
         >FLINTA*</app-toggle-button
       >
     </div>
     <div class="flex gap-3 mx-5 my-5">
       <app-toggle-button
-        (click)="changeRedezeittype(RedezeitType.CISM)"
-        [toggled]="RedezeitType.CISM === currentSelectedRedezeitType"
+        (click)="changeSpeaker(Speaker.CISM)"
+        [toggled]="Speaker.CISM === currentSelectedRedezeitType"
         >Beitrag</app-toggle-button
       >
       <app-toggle-button
-        [toggled]="RedezeitType.FLINTA === currentSelectedRedezeitType"
-        (click)="changeRedezeittype(RedezeitType.FLINTA)"
+        [toggled]="Speaker.FLINTA === currentSelectedRedezeitType"
+        (click)="changeSpeaker(Speaker.FLINTA)"
         >Bericht</app-toggle-button
       >
     </div>
