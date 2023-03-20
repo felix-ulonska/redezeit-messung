@@ -1,4 +1,34 @@
 <app-modal titleText="Edit Entry">
-  <div>Zeit</div>
-  <div>Art</div>
+  <form [formGroup]="form">
+    <label>Zeit in Sekunden</label>
+    <input
+      class="shadow appearance-none border rounded w-28 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      formControlName="duration"
+    />
+    <div>Art</div>
+    <div class="flex gap-3 mx-5 my-5">
+      <app-toggle-button
+        (click)="changeRedezeittype(RedezeitType.CISM)"
+        [toggled]="RedezeitType.CISM === currentSelectedRedezeitType"
+        >CIS-M</app-toggle-button
+      >
+      <app-toggle-button
+        [toggled]="RedezeitType.FLINTA === currentSelectedRedezeitType"
+        (click)="changeRedezeittype(RedezeitType.FLINTA)"
+        >FLINTA*</app-toggle-button
+      >
+    </div>
+    <div class="flex gap-3 mx-5 my-5">
+      <app-toggle-button
+        (click)="changeRedezeittype(RedezeitType.CISM)"
+        [toggled]="RedezeitType.CISM === currentSelectedRedezeitType"
+        >Beitrag</app-toggle-button
+      >
+      <app-toggle-button
+        [toggled]="RedezeitType.FLINTA === currentSelectedRedezeitType"
+        (click)="changeRedezeittype(RedezeitType.FLINTA)"
+        >Bericht</app-toggle-button
+      >
+    </div>
+  </form>
 </app-modal>

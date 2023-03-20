@@ -1,4 +1,4 @@
-export enum RedezeitType {
+export enum RedezeitSpeaker {
   CISM,
   FLINTA,
   PAUSE,

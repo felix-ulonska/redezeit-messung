@@ -7,7 +7,8 @@ import {
   pairwise,
   Subject,
 } from 'rxjs';
-import { RedezeitType } from '../models/redezeit-type';
+import { RedezeitSpeaker } from '../models/redezeit-type';
+import { RedezeitType } from '../_enums/redezeit-type.enum';
 import { GlobalStateService } from '../_services/global-state.service';
 
 const toSeconds = map(([timeCisM, second]) =>
@@ -32,7 +33,7 @@ const removeRunning = map<[number, number, any], [number, number]>(
   styleUrls: ['./redezeit-side.component.scss'],
 })
 export class RedezeitSideComponent {
-  @Input() type: RedezeitType = RedezeitType.CISM;
+  @Input() type: RedezeitSpeaker = RedezeitSpeaker.CISM;
 
   startTime$ = new BehaviorSubject<number>(0);
   everySecond$ = new Subject<number>();
@@ -52,7 +53,7 @@ export class RedezeitSideComponent {
 
   redezeitenForType$ = this.globaleState.redezeiten.pipe(
     map((redezeiten) =>
-      redezeiten.filter((redezeit) => redezeit.type == this.type)
+      redezeiten.filter((redezeit) => redezeit.speaker == this.type)
     )
   );
 
@@ -62,11 +63,11 @@ export class RedezeitSideComponent {
 
   get title() {
     switch (this.type) {
-      case RedezeitType.CISM:
+      case RedezeitSpeaker.CISM:
         return 'Cis Mänlich';
-      case RedezeitType.FLINTA:
+      case RedezeitSpeaker.FLINTA:
         return 'FLINTA*';
-      case RedezeitType.PAUSE:
+      case RedezeitSpeaker.PAUSE:
         return 'Pause';
       default:
         return 'Ey Software Fehler';
@@ -93,8 +94,10 @@ export class RedezeitSideComponent {
           ...this.globaleState.redezeiten.value,
           {
             duration: seconds,
-            type: this.type,
+            speaker: this.type,
             date: new Date(),
+            id: crypto.randomUUID(),
+            type: RedezeitType.Beitrag, // TODO
           },
         ]);
       });

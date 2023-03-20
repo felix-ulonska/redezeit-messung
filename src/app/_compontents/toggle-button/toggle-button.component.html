@@ -1,0 +1,9 @@
+<button
+  [class.bg-green-300]="toggled"
+  [class.bg-slate-300]="!toggled"
+  [class.hover:bg-slate-200]="!toggled"
+  class="shadow-xl rounded-lg px-3 py-2"
+  (click)="onClick()"
+>
+  <ng-content></ng-content>
+</button>

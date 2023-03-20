@@ -13,6 +13,8 @@ import { TypeRedezeitPipe } from './_pipes/type-redezeit.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { ModalComponent } from './modal/modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToggleButtonComponent } from './_compontents/toggle-button/toggle-button.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,14 @@ import { ModalComponent } from './modal/modal.component';
     TypeRedezeitPipe,
     EditModalComponent,
     ModalComponent,
+    ToggleButtonComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

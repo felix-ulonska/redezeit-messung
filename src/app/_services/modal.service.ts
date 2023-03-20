@@ -1,15 +1,29 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export enum ModalType {
+  EditModal,
+}
+
+export interface ModalEditData {
+  entryID: string;
+}
+
 export interface ModalState {
   opened: boolean;
+  modalID?: ModalType;
+  data?: ModalEditData;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  private _modalState$ = new BehaviorSubject({ opened: false });
+  private _modalState$ = new BehaviorSubject<ModalState>({
+    opened: true,
+    modalID: ModalType.EditModal,
+    data: { entryID: 'asdasd' },
+  });
 
   get modalState$() {
     return this._modalState$.asObservable();
@@ -22,10 +36,12 @@ export class ModalService {
     });
   }
 
-  openModal() {
+  openModal(opts: { modalID: ModalType; data: ModalEditData }) {
     console.log(this);
     this._modalState$.next({
       opened: true,
+      modalID: opts.modalID,
+      data: opts.data,
     });
   }
 }

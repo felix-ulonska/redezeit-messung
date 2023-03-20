@@ -2,7 +2,7 @@
   *ngFor="let redezeit of redezeitState.redezeiten | async"
   class="flex justify-center"
 >
-  <div class="flex justify-between w-60">
+  <div class="flex justify-between w-96">
     <div class="font-light">
       {{ redezeit.date | startDate }}
     </div>
@@ -13,5 +13,8 @@
     <div>
       {{ redezeit.type | typeRedezeit }}
     </div>
+    <button class="bg-slate-200 rounded-lg p-3" (click)="edit(redezeit.id)">
+      Edit!
+    </button>
   </div>
 </div>

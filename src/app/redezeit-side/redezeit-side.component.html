@@ -10,7 +10,7 @@
     <div>
       <span class="font-bold text-xl">
         <div *ngIf="running$ | async; else notRunning">Messung stoppen</div>
-        <ng-template #notRunning>Messung starten</ng-template>
+        <ng-template #notRunning>Redezeit starten</ng-template>
       </span>
       <div class="text-center">
         {{ timeHumanReadable$ | async }}
