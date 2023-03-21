@@ -13,8 +13,16 @@ export interface Modifier {
 })
 export class GlobalStateService {
   public state$ = new BehaviorSubject<RedezeitSpeaker>(RedezeitSpeaker.PAUSE);
-  public redezeiten = new BehaviorSubject<Redezeit[]>([]);
+  public redezeiten = new BehaviorSubject<Redezeit[]>(
+    JSON.parse(localStorage.getItem('content') ?? '[]') ?? []
+  );
   public modifier$ = new BehaviorSubject<Modifier>({
     type: RedezeitType.Beitrag,
   });
+
+  constructor() {
+    this.redezeiten.subscribe((redezeiten) => {
+      localStorage.setItem('content', JSON.stringify(redezeiten));
+    });
+  }
 }
