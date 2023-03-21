@@ -20,9 +20,7 @@ export interface ModalState {
 })
 export class ModalService {
   private _modalState$ = new BehaviorSubject<ModalState>({
-    opened: true,
-    modalID: ModalType.EditModal,
-    data: { entryID: 'asdasd' },
+    opened: false,
   });
 
   get modalState$() {

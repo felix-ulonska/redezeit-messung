@@ -9,6 +9,17 @@
       class="flex-grow bg-zinc-700 text-slate-100"
     ></app-redezeit-side>
   </div>
+  <div class="flex justify-center my-5">
+    <app-toggle-button
+      [toggled]="(isModifierBericht$ | async)!!"
+      (click)="toggleBerichtType()"
+      >{{
+        (isModifierBericht$ | async)
+          ? "Es wird ein Bericht gemessen"
+          : "Es wird KEIN Bericht gemessen"
+      }}</app-toggle-button
+    >
+  </div>
   <div class="h-1/2 bg-slate-400">
     <h1 class="text-center text-2xl">Historie</h1>
     <app-history></app-history>

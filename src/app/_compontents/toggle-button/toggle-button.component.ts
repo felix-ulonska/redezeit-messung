@@ -3,7 +3,9 @@ import {
   Component,
   forwardRef,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -20,8 +22,7 @@ import { Subject } from 'rxjs';
     },
   ],
 })
-export class ToggleButtonComponent implements ControlValueAccessor {
-  @Output() click = new Subject<void>();
+export class ToggleButtonComponent implements ControlValueAccessor, OnChanges {
   @Input() toggled = false;
   @Input()
   type: any = null;
@@ -30,6 +31,13 @@ export class ToggleButtonComponent implements ControlValueAccessor {
   private _onTouched = () => {};
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['toggled']) {
+      console.log('flip!', changes);
+      this.cdr.detectChanges();
+    }
+  }
 
   registerOnChange(fn: any): void {
     this._onChange = fn;
@@ -43,7 +51,6 @@ export class ToggleButtonComponent implements ControlValueAccessor {
     if (this._onChange) {
       this._onChange(this.type);
     }
-    this.click.next();
   }
 
   writeValue(obj: any): void {
