@@ -2,19 +2,20 @@
   *ngFor="let redezeit of redezeitState.redezeiten | async"
   class="flex justify-center"
 >
-  <div class="flex justify-between w-96 m-3 items-baseline">
-    <div class="font-light">
-      {{ redezeit.date | startDate }}
+  <div class="flex shadow-lg w-96 m-1">
+    <div class="font-light w-1/4">
+      {{ redezeit.date | date : "shortTime" }}
     </div>
-    -
-    <div>
+    <div class="w-1/4">
       {{ redezeit.duration | duration }}
     </div>
-    <div>
+    <div class="w-1/4">
       {{ redezeit.speaker | typeRedezeit }}
     </div>
-    <button class="bg-slate-200 rounded-lg p-3" (click)="edit(redezeit.id)">
-      Bearbeiten
-    </button>
+    <div class="flex justify-end flex-col flex-shrink">
+      <button class="bg-gray-200 rounded-lg p-1" (click)="edit(redezeit.id)">
+        <img src="./assets/icons/edit.svg" height="12px" />
+      </button>
+    </div>
   </div>
 </div>

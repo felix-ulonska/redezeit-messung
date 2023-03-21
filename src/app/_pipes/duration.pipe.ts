@@ -8,7 +8,7 @@ export class DurationPipe implements PipeTransform {
     const minutes = Math.floor(seconds / 60);
     const secondsremainder = seconds % 60;
     if (minutes > 0) {
-      return `${minutes} min ${secondsremainder} sec`;
+      return `${minutes}:${secondsremainder} min`;
     } else {
       return `${secondsremainder} sec`;
     }
