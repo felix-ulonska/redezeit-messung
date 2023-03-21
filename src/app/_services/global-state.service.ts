@@ -25,4 +25,10 @@ export class GlobalStateService {
       localStorage.setItem('content', JSON.stringify(redezeiten));
     });
   }
+
+  removeRedezeit(id: string) {
+    this.redezeiten.next(
+      this.redezeiten.getValue().filter((redezeit) => redezeit.id !== id)
+    );
+  }
 }

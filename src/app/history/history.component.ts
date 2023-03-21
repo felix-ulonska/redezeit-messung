@@ -19,4 +19,12 @@ export class HistoryComponent {
       data: { entryID: entryID },
     });
   }
+
+  public delete(entryID: string) {
+    this.modalService
+      .openModal({
+        modalID: ModalType.DeleteModal,
+      })
+      .then((confirmed) => this.redezeitState.removeRedezeit(entryID));
+  }
 }

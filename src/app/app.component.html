@@ -9,6 +9,7 @@
       class="flex-grow bg-zinc-700 text-slate-100"
     ></app-redezeit-side>
   </div>
+  <div style="height: 5px; background-color: white"></div>
   <div class="flex justify-center my-5">
     <app-toggle-button
       [toggled]="(isModifierBericht$ | async)!!"
@@ -26,3 +27,4 @@
   </div>
 </div>
 <app-edit-modal></app-edit-modal>
+<app-confirm-dialog></app-confirm-dialog>

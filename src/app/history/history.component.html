@@ -12,10 +12,14 @@
     <div class="w-1/4">
       {{ redezeit.speaker | typeRedezeit }}
     </div>
-    <div class="flex justify-end flex-col flex-shrink">
+    <div class="flex justify-end flex-shrink">
       <button class="bg-gray-200 rounded-lg p-1" (click)="edit(redezeit.id)">
         <img src="./assets/icons/edit.svg" height="12px" />
+      </button>
+      <button class="bg-red-200 rounded-lg p-1" (click)="delete(redezeit.id)">
+        <img src="./assets/icons/delete.svg" height="12px" />
       </button>
     </div>
   </div>
 </div>
+<app-confirm-dialog> </app-confirm-dialog>

@@ -1,6 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
 import { map, Subject } from 'rxjs';
-import { ModalService } from '../_services/modal.service';
+import { ModalService, ModalType } from '../_services/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -9,22 +9,30 @@ import { ModalService } from '../_services/modal.service';
 })
 export class ModalComponent {
   @Output()
-  public saved = new Subject<void>();
+  public confirmed = new Subject<void>();
 
   @Input()
   public titleText: string = '';
 
+  @Input()
+  public confirmButton?: string;
+
+  @Input()
+  public modalID?: ModalType;
+
   constructor(private modalService: ModalService) {}
 
   get opened$() {
-    return this.modalService.modalState$.pipe(map((state) => state.opened));
+    return this.modalService.modalState$.pipe(
+      map((state) => state.opened && state.modalID === this.modalID)
+    );
   }
 
   public close() {
     return this.modalService.closeModal();
   }
 
-  public save() {
-    this.saved.next();
+  public confirm() {
+    this.confirmed.next();
   }
 }

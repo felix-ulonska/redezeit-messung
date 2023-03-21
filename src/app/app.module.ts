@@ -15,6 +15,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToggleButtonComponent } from './_compontents/toggle-button/toggle-button.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ToggleButtonComponent } from './_compontents/toggle-button/toggle-butto
     EditModalComponent,
     ModalComponent,
     ToggleButtonComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

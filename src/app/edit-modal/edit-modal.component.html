@@ -1,6 +1,10 @@
-<app-modal (saved)="save()" titleText="Edit Entry">
-  <form [formGroup]="form">
-    <label>Zeit in Sekunden</label>
+<app-modal
+  (confirmed)="save()"
+  confirmButton="Speichern"
+  titleText="Edit Entry"
+>
+  <form [formGroup]="form" class="mx-5">
+    <label>Zeit in Sekunden</label><br />
     <input
       class="shadow appearance-none border rounded w-28 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       formControlName="duration"
