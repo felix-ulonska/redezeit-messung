@@ -3,6 +3,8 @@ import {
   BehaviorSubject,
   combineLatest,
   filter,
+  firstValueFrom,
+  fromEvent,
   map,
   pairwise,
   Subject,
@@ -106,10 +108,27 @@ export class RedezeitSideComponent {
           },
         ]);
       });
+
+    fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(
+        filter(
+          (keyPressed: KeyboardEvent) =>
+            keyPressed.key === (this.type === RedezeitSpeaker.CISM ? 'c' : 'f')
+        )
+      )
+      .subscribe(() => {
+        this.toggle();
+      });
   }
 
-  public startTimer() {
-    this.startTime$.next(Date.now());
-    this.globaleState.state$.next(this.type);
+  public toggle() {
+    firstValueFrom(this.running$).then((running) => {
+      if (running) {
+        this.globaleState.state$.next(RedezeitSpeaker.PAUSE);
+      } else {
+        this.startTime$.next(Date.now());
+        this.globaleState.state$.next(this.type);
+      }
+    });
   }
 }

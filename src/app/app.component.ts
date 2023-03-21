@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { combineLatest, fromEvent } from 'rxjs';
 import { RedezeitSpeaker } from './models/redezeit-type';
 import { RedezeitType } from './_enums/redezeit-type.enum';
 import { GlobalStateService } from './_services/global-state.service';

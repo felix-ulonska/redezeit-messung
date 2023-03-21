@@ -2,17 +2,11 @@
   <div class="flex flex-col h-1/2">
     <app-redezeit-side
       [type]="STATE_ENUM.CISM"
-      class="flex-grow bg-violet-300"
+      class="flex-grow bg-slate-700 text-slate-100"
     ></app-redezeit-side>
-    <button
-      class="w-full flex flex-col h-full justify-center items-center hover:bg-slate-200"
-      (click)="stop()"
-    >
-      <h1 class="text-2xl">Redezeit beenden</h1>
-    </button>
     <app-redezeit-side
       [type]="STATE_ENUM.FLINTA"
-      class="flex-grow bg-emerald-300"
+      class="flex-grow bg-zinc-700 text-slate-100"
     ></app-redezeit-side>
   </div>
   <div class="h-1/2 bg-slate-400">
