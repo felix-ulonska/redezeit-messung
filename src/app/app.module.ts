@@ -16,6 +16,7 @@ import { ModalComponent } from './modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToggleButtonComponent } from './_compontents/toggle-button/toggle-button.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { SpeakerPipe } from './_pipes/speaker.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ModalComponent,
     ToggleButtonComponent,
     ConfirmDialogComponent,
+    SpeakerPipe,
   ],
   imports: [
     BrowserModule,

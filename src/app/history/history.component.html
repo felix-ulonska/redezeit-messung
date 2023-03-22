@@ -3,14 +3,17 @@
   class="flex justify-center"
 >
   <div class="flex shadow-lg w-96 m-1">
-    <div class="font-light w-1/4">
+    <div class="font-light w-1/5">
       {{ redezeit.date | date : "shortTime" }}
     </div>
-    <div class="w-1/4">
+    <div class="w-1/5">
       {{ redezeit.duration | duration }}
     </div>
-    <div class="w-1/4">
-      {{ redezeit.speaker | typeRedezeit }}
+    <div class="w-1/5">
+      {{ redezeit.speaker | speaker }}
+    </div>
+    <div class="w-1/5">
+      {{ redezeit.type | typeRedezeit }}
     </div>
     <div class="flex justify-end flex-shrink">
       <button class="bg-gray-200 rounded-lg p-1" (click)="edit(redezeit.id)">

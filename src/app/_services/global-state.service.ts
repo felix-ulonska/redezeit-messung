@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Redezeit } from '../models/redezeit';
 import { RedezeitSpeaker } from '../models/redezeit-type';
 import { RedezeitType } from '../_enums/redezeit-type.enum';
@@ -30,5 +30,26 @@ export class GlobalStateService {
     this.redezeiten.next(
       this.redezeiten.getValue().filter((redezeit) => redezeit.id !== id)
     );
+  }
+
+  exportCSV() {
+    const content = this.redezeiten
+      .getValue()
+      .map((redezeit) =>
+        [
+          redezeit.id,
+          redezeit.date,
+          redezeit.duration,
+          redezeit.type,
+          redezeit.speaker,
+        ].join(';')
+      )
+      .join('\n');
+    const link = document.createElement('a');
+    const file = new Blob([content], { type: 'text/csv' });
+    link.href = URL.createObjectURL(file);
+    link.download = 'epxport.csv';
+    link.click();
+    URL.revokeObjectURL(link.href);
   }
 }

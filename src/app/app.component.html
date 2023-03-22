@@ -10,7 +10,7 @@
     ></app-redezeit-side>
   </div>
   <div style="height: 5px; background-color: white"></div>
-  <div class="flex justify-center my-5">
+  <div class="flex flex-col items-center my-5">
     <app-toggle-button
       [toggled]="(isModifierBericht$ | async)!!"
       (click)="toggleBerichtType()"
@@ -20,6 +20,18 @@
           : "Es wird KEIN Bericht gemessen"
       }}</app-toggle-button
     >
+    <button
+      class="shadow-xl bg-red-100 hover:bg-red-400 rounded-lg mt-5 px-3 py-2"
+      (click)="delete()"
+    >
+      Alles löschen!
+    </button>
+    <button
+      class="shadow-xl bg-slate-100 hover:bg-slate-200 rounded-lg mt-5 px-3 py-2"
+      (click)="export()"
+    >
+      Export
+    </button>
   </div>
   <div class="h-1/2">
     <h1 class="text-center text-2xl">Historie</h1>

@@ -3,7 +3,7 @@ import { combineLatest, filter, fromEvent, map } from 'rxjs';
 import { RedezeitSpeaker } from './models/redezeit-type';
 import { RedezeitType } from './_enums/redezeit-type.enum';
 import { GlobalStateService } from './_services/global-state.service';
-import { ModalService } from './_services/modal.service';
+import { ModalService, ModalType } from './_services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,10 @@ export class AppComponent implements OnInit {
   STATE_ENUM = RedezeitSpeaker;
   REDEZEIT_TYPE = RedezeitType;
 
-  constructor(public redezeitState: GlobalStateService) {}
+  constructor(
+    public redezeitState: GlobalStateService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     console.log('====================================');
@@ -51,5 +54,19 @@ export class AppComponent implements OnInit {
 
   stop() {
     this.redezeitState.state$.next(RedezeitSpeaker.PAUSE);
+  }
+
+  export() {
+    this.redezeitState.exportCSV();
+  }
+
+  delete() {
+    this.modalService
+      .openModal({ modalID: ModalType.DeleteModal })
+      .then((confirm) => {
+        if (confirm) {
+          this.redezeitState.redezeiten.next([]);
+        }
+      });
   }
 }
