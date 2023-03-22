@@ -4,7 +4,7 @@ import { combineLatest, firstValueFrom, map, Subject } from 'rxjs';
 import { RedezeitSpeaker } from '../models/redezeit-type';
 import { RedezeitType } from '../_enums/redezeit-type.enum';
 import { GlobalStateService } from '../_services/global-state.service';
-import { ModalService } from '../_services/modal.service';
+import { ModalService, ModalType } from '../_services/modal.service';
 
 @Component({
   selector: 'app-edit-modal',
@@ -12,6 +12,8 @@ import { ModalService } from '../_services/modal.service';
   styleUrls: ['./edit-modal.component.scss'],
 })
 export class EditModalComponent implements OnInit, OnDestroy {
+  ModalTypeConfirm = ModalType.EditModal;
+
   constructor(
     private modalService: ModalService,
     private globalStateService: GlobalStateService
