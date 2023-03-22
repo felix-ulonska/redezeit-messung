@@ -68,7 +68,7 @@ export class RedezeitSideComponent {
   get title() {
     switch (this.type) {
       case RedezeitSpeaker.CISM:
-        return 'Cis Mänlich';
+        return 'Cis-Männlich';
       case RedezeitSpeaker.FLINTA:
         return 'FLINTA*';
       case RedezeitSpeaker.PAUSE:
