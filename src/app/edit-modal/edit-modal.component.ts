@@ -12,7 +12,7 @@ import { ModalService, ModalType } from '../_services/modal.service';
   styleUrls: ['./edit-modal.component.scss'],
 })
 export class EditModalComponent implements OnInit, OnDestroy {
-  ModalTypeConfirm = ModalType.EditModal;
+  modalID = ModalType.EditModal;
 
   constructor(
     private modalService: ModalService,
