@@ -1,5 +1,5 @@
 <div
-  *ngFor="let redezeit of redezeitState.redezeiten | async"
+  *ngFor="let redezeit of (redezeitState.redezeiten | async)?.reverse()"
   class="flex justify-center"
 >
   <div class="flex shadow-lg w-96 m-1">
