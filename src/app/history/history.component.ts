@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs';
 import { GlobalStateService } from '../_services/global-state.service';
 import { ModalService, ModalType } from '../_services/modal.service';
 
@@ -12,6 +13,12 @@ export class HistoryComponent {
     public redezeitState: GlobalStateService,
     private modalService: ModalService
   ) {}
+
+  rezeiten = this.redezeitState.redezeiten.pipe(
+    map((redezeite) => {
+      [...redezeite].reverse();
+    })
+  );
 
   public edit(entryID: string) {
     this.modalService.openModal({
