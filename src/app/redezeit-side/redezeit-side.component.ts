@@ -104,7 +104,7 @@ export class RedezeitSideComponent {
             speaker: this.type,
             date: new Date(),
             id: crypto.randomUUID(),
-            type: RedezeitType.Beitrag, // TODO
+            type: this.globaleState.modifier$.getValue().type,
           },
         ]);
       });
