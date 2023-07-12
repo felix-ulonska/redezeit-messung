@@ -1,5 +1,5 @@
 export enum RedezeitSpeaker {
-  CISM,
-  FLINTA,
-  PAUSE,
+  CISM = 'CISM',
+  FLINTA = 'FLINTA',
+  PAUSE = 'PAUSE',
 }

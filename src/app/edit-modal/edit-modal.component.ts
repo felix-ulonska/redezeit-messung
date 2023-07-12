@@ -78,12 +78,12 @@ export class EditModalComponent implements OnInit, OnDestroy {
       .then(([redezeiten, entryID]) => {
         this.globalStateService.redezeiten.next(
           redezeiten.map((redezeit) => {
-            if (redezeit.id === entryID?.id) {
+            if (redezeit.id === entryID!.id) {
               return {
                 ...redezeit,
                 duration: this.form.value.duration ?? 0,
-                speaker: this.form.value.speaker ?? 0,
-                type: this.form.value.type ?? 0,
+                speaker: this.form.value.speaker ?? RedezeitSpeaker.CISM,
+                type: this.form.value.type ?? RedezeitType.Beitrag,
               };
             }
             return redezeit;

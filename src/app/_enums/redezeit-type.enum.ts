@@ -1,4 +1,4 @@
 export enum RedezeitType {
-  Beitrag,
-  Bericht,
+  Beitrag = 'Beitrag',
+  Bericht = 'Bericht',
 }
