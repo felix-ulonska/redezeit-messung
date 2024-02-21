@@ -48,7 +48,7 @@ export class GlobalStateService {
     const link = document.createElement('a');
     const file = new Blob([content], { type: 'text/csv' });
     link.href = URL.createObjectURL(file);
-    link.download = 'epxport.csv';
+    link.download = 'export.csv';
     link.click();
     URL.revokeObjectURL(link.href);
   }
