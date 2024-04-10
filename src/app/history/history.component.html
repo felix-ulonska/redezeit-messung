@@ -1,19 +1,20 @@
 <div
-  *ngFor="let redezeit of redezeitState.redezeiten | async"
+  *ngFor="let redezeit of combinedRedezeitAndTop$ | async"
   class="flex justify-center"
 >
+  @if ($any(redezeit).speaker) {
   <div class="flex shadow-lg w-96 m-1">
     <div class="font-light w-1/5">
-      {{ redezeit.date | date : "shortTime" }}
+      {{ $any(redezeit).date | date: "shortTime" }}
     </div>
     <div class="w-1/5">
-      {{ redezeit.duration | duration }}
+      {{ $any(redezeit).duration | duration }}
     </div>
     <div class="w-1/5">
-      {{ redezeit.speaker | speaker }}
+      {{ $any(redezeit).speaker | speaker }}
     </div>
     <div class="w-1/5">
-      {{ redezeit.type | typeRedezeit }}
+      {{ $any(redezeit).type | typeRedezeit }}
     </div>
     <div class="flex justify-end flex-shrink">
       <button class="bg-gray-200 rounded-lg p-1" (click)="edit(redezeit.id)">
@@ -24,5 +25,27 @@
       </button>
     </div>
   </div>
+  } @else {
+  <div class="flex shadow-lg w-96 m-1">
+    <div class="font-light w-1/5">
+      {{ $any(redezeit).date | date: "shortTime" }}
+    </div>
+    <div class="w-1/5">TOP:</div>
+    <div class="w-3/5">
+      {{ $any(redezeit).name }}
+    </div>
+    <div class="flex justify-end flex-shrink">
+      <button class="bg-gray-200 rounded-lg p-1" (click)="editTop(redezeit.id)">
+        <img src="./assets/icons/edit.svg" height="12px" />
+      </button>
+      <button
+        class="bg-red-200 rounded-lg p-1"
+        (click)="deleteTop(redezeit.id)"
+      >
+        <img src="./assets/icons/delete.svg" height="12px" />
+      </button>
+    </div>
+  </div>
+  }
 </div>
 <app-confirm-dialog> </app-confirm-dialog>

@@ -4,6 +4,7 @@ import { RedezeitSpeaker } from './models/redezeit-type';
 import { RedezeitType } from './_enums/redezeit-type.enum';
 import { GlobalStateService } from './_services/global-state.service';
 import { ModalService, ModalType } from './_services/modal.service';
+import { Top } from './models/top';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,17 @@ import { ModalService, ModalType } from './_services/modal.service';
 export class AppComponent implements OnInit {
   STATE_ENUM = RedezeitSpeaker;
   REDEZEIT_TYPE = RedezeitType;
+  inputNewTop: string = '';
 
   constructor(
     public redezeitState: GlobalStateService,
-    private modalService: ModalService
+    private modalService: ModalService,
   ) {}
 
   ngOnInit(): void {
     console.log('====================================');
     console.log(
-      'Ayoooooo\nIntresse an der Anwendung?\nSchaue einfach in das Github!\nhttps://github.com/felix-ulonska/redezeit-messung'
+      'Ayoooooo\nIntresse an der Anwendung?\nSchaue einfach in das Github!\nhttps://github.com/felix-ulonska/redezeit-messung',
     );
     console.log('====================================');
     fromEvent<KeyboardEvent>(document, 'keydown')
@@ -38,12 +40,11 @@ export class AppComponent implements OnInit {
 
   get isModifierBericht$() {
     return this.modifier$.pipe(
-      map((modifier) => modifier.type === RedezeitType.Bericht)
+      map((modifier) => modifier.type === RedezeitType.Bericht),
     );
   }
 
   toggleBerichtType() {
-    console.log('this modifier');
     this.redezeitState.modifier$.next({
       type:
         this.redezeitState.modifier$.value.type !== RedezeitType.Bericht
@@ -52,12 +53,20 @@ export class AppComponent implements OnInit {
     });
   }
 
+  addTop() {
+    this.redezeitState.addTop({
+      id: crypto.randomUUID(),
+      date: new Date(),
+      name: this.inputNewTop,
+    } as Top);
+  }
+
   stop() {
     this.redezeitState.state$.next(RedezeitSpeaker.PAUSE);
   }
 
   export() {
-    this.redezeitState.exportCSV();
+    this.redezeitState.exportJSON();
   }
 
   delete() {
@@ -65,7 +74,7 @@ export class AppComponent implements OnInit {
       .openModal({ modalID: ModalType.DeleteModal })
       .then((confirm) => {
         if (confirm) {
-          this.redezeitState.redezeiten.next([]);
+          this.redezeitState.redezeiten.next({ redezeiten: [], tops: [] });
         }
       });
   }

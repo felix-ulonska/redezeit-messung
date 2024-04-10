@@ -16,7 +16,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private modalService: ModalService,
-    private globalStateService: GlobalStateService
+    private globalStateService: GlobalStateService,
   ) {}
 
   onDestroy$ = new Subject<void>();
@@ -43,8 +43,8 @@ export class EditModalComponent implements OnInit, OnDestroy {
       this.globalStateService.redezeiten,
     ]).pipe(
       map(([entryID, redezeiten]) =>
-        redezeiten.find((redezeit) => redezeit.id === entryID)
-      )
+        redezeiten.redezeiten.find((redezeit) => redezeit.id === entryID),
+      ),
     );
   }
 
@@ -54,7 +54,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
         duration: entry?.duration ?? 0,
         speaker: entry?.speaker ?? RedezeitSpeaker.CISM,
         type: entry?.type ?? RedezeitType.Beitrag,
-      })
+      }),
     );
   }
 
@@ -73,11 +73,12 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   public save() {
     firstValueFrom(
-      combineLatest([this.globalStateService.redezeiten, this.entry$])
+      combineLatest([this.globalStateService.redezeiten, this.entry$]),
     )
-      .then(([redezeiten, entryID]) => {
-        this.globalStateService.redezeiten.next(
-          redezeiten.map((redezeit) => {
+      .then(([state, entryID]) => {
+        this.globalStateService.redezeiten.next({
+          ...state,
+          redezeiten: state.redezeiten.map((redezeit) => {
             if (redezeit.id === entryID!.id) {
               return {
                 ...redezeit,
@@ -87,8 +88,8 @@ export class EditModalComponent implements OnInit, OnDestroy {
               };
             }
             return redezeit;
-          })
-        );
+          }),
+        });
       })
       .then(() => {
         this.modalService.closeModal();

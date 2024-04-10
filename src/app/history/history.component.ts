@@ -11,14 +11,8 @@ import { ModalService, ModalType } from '../_services/modal.service';
 export class HistoryComponent {
   constructor(
     public redezeitState: GlobalStateService,
-    private modalService: ModalService
+    private modalService: ModalService,
   ) {}
-
-  rezeiten = this.redezeitState.redezeiten.pipe(
-    map((redezeite) => {
-      [...redezeite].reverse();
-    })
-  );
 
   public edit(entryID: string) {
     this.modalService.openModal({
@@ -27,11 +21,38 @@ export class HistoryComponent {
     });
   }
 
+  public combinedRedezeitAndTop$ = this.redezeitState.redezeiten.pipe(
+    map((state) => {
+      return [...state.redezeiten, ...state.tops].sort(
+        (a, b) => a.date.valueOf() - b.date.valueOf(),
+      );
+    }),
+  );
+
   public delete(entryID: string) {
     this.modalService
       .openModal({
         modalID: ModalType.DeleteModal,
       })
-      .then((confirmed) => this.redezeitState.removeRedezeit(entryID));
+      .then((confirmed) => {
+        if (confirmed) this.redezeitState.removeRedezeit(entryID);
+      });
+  }
+
+  public deleteTop(entryID: string) {
+    this.modalService
+      .openModal({
+        modalID: ModalType.DeleteModal,
+      })
+      .then((confirmed) => {
+        if (confirmed) this.redezeitState.removeTop(entryID);
+      });
+  }
+
+  public editTop(entryID: string) {
+    this.modalService.openModal({
+      modalID: ModalType.EditTopModal,
+      data: { entryID: entryID },
+    });
   }
 }

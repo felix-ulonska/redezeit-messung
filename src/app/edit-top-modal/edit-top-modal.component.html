@@ -1,0 +1,14 @@
+<app-modal
+  (confirmed)="save()"
+  confirmButton="Speichern"
+  titleText="Edit Entry"
+  [modalID]="ModalTypeEdit"
+>
+  <form [formGroup]="form" class="mx-5">
+    <label>Neuer Name</label><br />
+    <input
+      class="shadow appearance-none border rounded w-28 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      formControlName="name"
+    />
+  </form>
+</app-modal>

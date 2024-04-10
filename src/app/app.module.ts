@@ -13,10 +13,11 @@ import { TypeRedezeitPipe } from './_pipes/type-redezeit.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { ModalComponent } from './modal/modal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToggleButtonComponent } from './_compontents/toggle-button/toggle-button.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { SpeakerPipe } from './_pipes/speaker.pipe';
+import { EditTopModalComponent } from './edit-top-modal/edit-top-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SpeakerPipe } from './_pipes/speaker.pipe';
     HistoryComponent,
     TypeRedezeitPipe,
     EditModalComponent,
+    EditTopModalComponent,
     ModalComponent,
     ToggleButtonComponent,
     ConfirmDialogComponent,
@@ -39,6 +41,7 @@ import { SpeakerPipe } from './_pipes/speaker.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

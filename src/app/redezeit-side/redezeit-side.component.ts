@@ -14,7 +14,7 @@ import { RedezeitType } from '../_enums/redezeit-type.enum';
 import { GlobalStateService } from '../_services/global-state.service';
 
 const toSeconds = map(([timeCisM, second]) =>
-  Math.floor((second - timeCisM) / 1000)
+  Math.floor((second - timeCisM) / 1000),
 );
 
 const filterBelowZero = map((sec: number) => Math.max(0, sec));
@@ -26,7 +26,7 @@ const secondsToFormat = map((seconds: number) => {
 });
 
 const removeRunning = map<[number, number, any], [number, number]>(
-  ([_0, _1, _2]) => [_0, _1]
+  ([_0, _1, _2]) => [_0, _1],
 );
 
 @Component({
@@ -48,20 +48,20 @@ export class RedezeitSideComponent {
     filter(([_0, _1, state]) => state === this.type),
     removeRunning,
     toSeconds,
-    filterBelowZero
+    filterBelowZero,
   );
 
   timeHumanReadable$ = this.timeInSeconds$.pipe(secondsToFormat);
 
   redezeitenForType$ = this.globaleState.redezeiten.pipe(
     map((redezeiten) =>
-      redezeiten.filter((redezeit) => redezeit.speaker == this.type)
-    )
+      redezeiten.redezeiten.filter((redezeit) => redezeit.speaker == this.type),
+    ),
   );
 
   get running$() {
     return this.globaleState.state$.pipe(
-      map((state) => this.type === state && state !== RedezeitSpeaker.PAUSE)
+      map((state) => this.type === state && state !== RedezeitSpeaker.PAUSE),
     );
   }
 
@@ -89,32 +89,35 @@ export class RedezeitSideComponent {
     ])
       .pipe(
         filter(
-          ([[speakerType, _], _a]) => speakerType !== RedezeitSpeaker.PAUSE
+          ([[speakerType, _], _a]) => speakerType !== RedezeitSpeaker.PAUSE,
         ),
         filter(
           ([[old_state, new_state], _]) =>
-            old_state === this.type && new_state !== this.type
-        )
+            old_state === this.type && new_state !== this.type,
+        ),
       )
       .subscribe(([_, seconds]) => {
-        this.globaleState.redezeiten.next([
+        this.globaleState.redezeiten.next({
           ...this.globaleState.redezeiten.value,
-          {
-            duration: seconds,
-            speaker: this.type,
-            date: new Date(),
-            id: crypto.randomUUID(),
-            type: this.globaleState.modifier$.getValue().type,
-          },
-        ]);
+          redezeiten: [
+            ...this.globaleState.redezeiten.value.redezeiten,
+            {
+              duration: seconds,
+              speaker: this.type,
+              date: new Date(),
+              id: crypto.randomUUID(),
+              type: this.globaleState.modifier$.getValue().type,
+            },
+          ],
+        });
       });
 
     fromEvent<KeyboardEvent>(document, 'keydown')
       .pipe(
         filter(
           (keyPressed: KeyboardEvent) =>
-            keyPressed.key === (this.type === RedezeitSpeaker.CISM ? 'c' : 'f')
-        )
+            keyPressed.key === (this.type === RedezeitSpeaker.CISM ? 'c' : 'f'),
+        ),
       )
       .subscribe(() => {
         this.toggle();

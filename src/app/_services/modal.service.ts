@@ -4,6 +4,7 @@ import { BehaviorSubject, firstValueFrom, Subject } from 'rxjs';
 export enum ModalType {
   EditModal,
   DeleteModal,
+  EditTopModal,
 }
 
 export interface ModalEditData {
@@ -56,6 +57,7 @@ export class ModalService {
       modalID: opts.modalID,
       data: opts.data,
     });
+    console.log(this._modalState$.getValue());
 
     return firstValueFrom(this._modalResult$);
   }
